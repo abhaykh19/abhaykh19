@@ -23,7 +23,7 @@ import os
 os.environ['OPENAI_API_KEY'] = "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"
 
 
-path=''
+path='./KC'
 max_input = 4096
 tokens = 200
 chunk_size = 600  # for LLM, we need to define chunk size
