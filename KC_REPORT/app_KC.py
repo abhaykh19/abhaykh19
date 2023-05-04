@@ -11,7 +11,7 @@ import json
 # pip install streamlit-chat
 from streamlit_chat import message
 
-openai.api_key = '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'
+openai.api_key = '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'
 
 # Create a Vector index
 from gpt_index import SimpleDirectoryReader, GPTSimpleVectorIndex, GPTListIndex, LLMPredictor, PromptHelper, \
@@ -20,7 +20,7 @@ from langchain import OpenAI
 import sys
 import os
 
-os.environ['OPENAI_API_KEY'] = "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"
+os.environ['OPENAI_API_KEY'] = "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"
 
 
 path='./KC'
