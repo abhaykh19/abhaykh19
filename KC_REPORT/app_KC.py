@@ -41,10 +41,13 @@ def ask_anything_1(vectorIndex,input_var):
   response = vIndex.query(input_var,response_mode="compact")
   return response
 
-'./vectorIndex_KC.json'
+import json
+with open(
+    './vectorIndex_KC.json', 'r') as f:
+    pass
 
 if user_input:
-    # vectorIndex = 'vectorIndex_KC.json'
+    vectorIndex = 'vectorIndex_KC.json'
     output = str(ask_anything_1(vectorIndex,user_input))
     print(type(output))
     st.session_state.past.append(user_input)
