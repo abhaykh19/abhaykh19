@@ -41,8 +41,7 @@ def ask_anything_1(vectorIndex,input_var):
   response = vIndex.query(input_var,response_mode="compact")
   return response
 
-import pandas as pd
-vectorIndex = pd.read_json('./vectorIndex_KC.json')
+'./vectorIndex_KC.json'
 
 if user_input:
     # vectorIndex = 'vectorIndex_KC.json'
