@@ -13,6 +13,38 @@ from streamlit_chat import message
 
 openai.api_key = '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'
 
+# Create a Vector index
+from gpt_index import SimpleDirectoryReader, GPTSimpleVectorIndex, GPTListIndex, LLMPredictor, PromptHelper, \
+    ServiceContext
+from langchain import OpenAI
+import sys
+import os
+
+os.environ['OPENAI_API_KEY'] = "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"
+
+
+path=''
+max_input = 4096
+tokens = 200
+chunk_size = 600  # for LLM, we need to define chunk size
+max_chunk_overlap = 20
+
+# define prompt
+promptHelper = PromptHelper(max_input, tokens, max_chunk_overlap, chunk_size_limit=chunk_size)
+
+# define LLM
+llmPredictor = LLMPredictor(llm=OpenAI(temperature=0, model_name="text-davinci-003", max_tokens=tokens))
+
+# load data
+docs = SimpleDirectoryReader(path).load_data()
+
+service_context = ServiceContext.from_defaults(llm_predictor=llmPredictor, prompt_helper=promptHelper)
+vectorIndex = GPTSimpleVectorIndex.from_documents(documents=docs, service_context=service_context)
+
+vectorIndex.save_to_disk('vectorIndex_KC.json')
+
+
+
 with st.expander("Disclaimer"):
     st.write("This is a disclaimer. The content of this application is a part of experimentation. The model is trained on Kimberly-Clark Year-End 2022 Results And 2023 Outlook online release.")
     st.write("check out this for the annual report [link](https://investor.kimberly-clark.com/news-releases/news-release-details/kimberly-clark-announces-year-end-2022-results-and-2023-outlook)")
@@ -41,10 +73,6 @@ def ask_anything_1(vectorIndex,input_var):
   response = vIndex.query(input_var,response_mode="compact")
   return response
 
-import json
-with open(
-    './vectorIndex_KC.json', 'r') as f:
-    pass
 
 if user_input:
     vectorIndex = 'vectorIndex_KC.json'
