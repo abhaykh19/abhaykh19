@@ -42,7 +42,7 @@ def ask_anything_1(vectorIndex,input_var):
   return response
 
 import pandas as pd
-vectorIndex = pd.read_json('vectorIndex_KC.json')
+vectorIndex = pd.read_json('./vectorIndex_KC.json')
 
 if user_input:
     # vectorIndex = 'vectorIndex_KC.json'
